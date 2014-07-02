@@ -1,4 +1,4 @@
-(function(Marionette) {
+(function(Marionette, _) {
 
   Marionette.Application.prototype.component =
   Marionette.Module.prototype.component = function(name, options) {
@@ -22,4 +22,4 @@
     return component;
   };
 
-})(Marionette);
+})(Marionette, _);
