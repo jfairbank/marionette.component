@@ -19,16 +19,16 @@ var Component = Marionette.Controller.extend({
   },
 
   show: function() {
-    this.showLayout();
+    this._showView();
   },
 
-  showLayout: function() {
-    var layout = this.layout = this.getLayout();
+  _showView: function() {
+    var view = this.view = this._getView();
 
-    this.listenTo(layout, 'show', function() {
-      this.triggerMethod('show:layout');
+    this.listenTo(view, 'show', function() {
+      this.triggerMethod('show:view');
     });
 
-    this.region.show(layout);
+    this.region.show(view);
   }
 });
