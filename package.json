@@ -1,0 +1,41 @@
+{
+  "name": "Marionette.Component",
+  "version": "0.0.1",
+  "description": "Create and manage reusable components in Marionette.js",
+  "main": "marionette.component.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "homepage": "https://github.com/jfairbank/marionette.component",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jfairbank/marionette.component.git"
+  },
+  "keywords": [
+    "backbone",
+    "marionette",
+    "backbonejs",
+    "marionettejs"
+  ],
+  "author": {
+    "name": "Jeremy Fairbank",
+    "email": "elpapapollo@gmail.com",
+    "url": "http://blog.jeremyfairbank.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jfairbank/marionette.component/issues"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.6",
+    "gulp-wrap-umd": "^0.2.1",
+    "gulp-uglify": "^0.3.1",
+    "run-sequence": "^0.3.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-header": "^1.0.5",
+    "gulp-jshint": "^1.7.1"
+  }
+}
