@@ -45,10 +45,9 @@ describe 'Marionette.Component', ->
     beforeEach ->
       # Region and view
       @region = new Marionette.Region(el: '#main')
-      @view   = new Marionette.ItemView(template: _.template('foo bar'))
+      @MyView = Marionette.ItemView.extend(template: _.template('foo bar'))
 
       # Stubs and spies
-      @getViewStub       = @sinon.stub().returns(@view)
       @showViewSpy       = @sinon.spy(Component.prototype, '_showView')
       @onShowViewStub    = @sinon.stub()
       @regionShow        = @sinon.spy(Marionette.Region.prototype, 'show')
@@ -56,21 +55,13 @@ describe 'Marionette.Component', ->
 
       # Component definition
       @MyComponent = Component.extend
+        viewClass: @MyView
         onShowView: @onShowViewStub
         triggerMethod: @triggerMethodStub
-        _getView: @getViewStub
 
       # Component instance
       @component = new @MyComponent(region: @region)
       @component.show()
-
-    it 'calls `_getView`', ->
-      expect(@getViewStub).to
-        .have.been.calledOnce
-        .and.have.been.calledOn(@component)
-
-    it 'assigns the view', ->
-      expect(@component.view).to.equal(@view)
 
     it 'calls `_showView`', ->
       expect(@showViewSpy).to
@@ -94,7 +85,7 @@ describe 'Marionette.Component', ->
       expect(@regionShow).to
         .have.been.calledOnce
         .and.have.been.calledOn(@region)
-        .and.have.been.calledWith(@view)
+        .and.have.been.calledWith(@component.view)
 
     it 'displays the view content in the region', ->
       expect(@region.$el).to.have.$text('foo bar')

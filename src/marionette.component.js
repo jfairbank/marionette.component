@@ -30,5 +30,18 @@ var Component = Marionette.Controller.extend({
     });
 
     this.region.show(view);
+  },
+
+  _getView: function() {
+    var ViewClass = this.viewClass;
+
+    if (!ViewClass) {
+      throw new Error('You must specify a viewClass for your component.');
+    }
+
+    return new ViewClass({
+      model: this.model,
+      collection: this.collection
+    });
   }
 });
