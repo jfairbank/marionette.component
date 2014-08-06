@@ -2,22 +2,22 @@ describe 'Marionette.Component', ->
   beforeEach ->
     @setFixtures '<div id="main"></div>'
 
-  it 'inherits from Marionette.Controller', ->
-    expect(new Component()).to.be.an.instanceof(Marionette.Controller)
+  it 'inherits from Marionette.Object', ->
+    expect(new Component()).to.be.an.instanceof(Marionette.Object)
 
   describe 'when instantiating', ->
     beforeEach ->
-      @ControllerSpy = @sinon.spy(Marionette.Controller.prototype, 'constructor')
+      @ObjectSpy = @sinon.spy(Marionette.Object.prototype, 'constructor')
       @component = new Component()
 
-    it 'calls the Controller constructor', ->
-      expect(@ControllerSpy).to
+    it 'calls the Object constructor', ->
+      expect(@ObjectSpy).to
         .have.been.calledOnce
         .and.have.been.calledOn(@component)
 
   describe 'when instantiating with options', ->
     beforeEach ->
-      @ControllerSpy = @sinon.spy(Marionette.Controller.prototype, 'constructor')
+      @ObjectSpy = @sinon.spy(Marionette.Object.prototype, 'constructor')
 
       @options =
         region:     new Marionette.Region(el: '#main')
@@ -35,8 +35,8 @@ describe 'Marionette.Component', ->
     it 'assigns the collection', ->
       expect(@component.collection).to.equal(@options.collection)
 
-    it 'calls the Controller constructor with the options', ->
-      expect(@ControllerSpy).to
+    it 'calls the Object constructor with the options', ->
+      expect(@ObjectSpy).to
         .have.been.calledOnce
         .and.have.been.calledOn(@component)
         .and.have.been.calledWith(@options)

@@ -7,7 +7,7 @@
 // Marionette.Component can optionally have a `region`, `model`,
 // and/or `collection` passed to it through the constructor options.
 
-Marionette.Component = Marionette.Controller.extend({
+Marionette.Component = Marionette.Object.extend({
   constructor: function(options) {
     options = options || {};
 
@@ -15,7 +15,7 @@ Marionette.Component = Marionette.Controller.extend({
     this.model      = options.model;
     this.collection = options.collection;
 
-    Marionette.Controller.prototype.constructor.apply(this, arguments);
+    Marionette.Object.prototype.constructor.apply(this, arguments);
   },
 
   show: function() {
