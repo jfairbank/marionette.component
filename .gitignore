@@ -1,1 +1,3 @@
 node_modules/
+spec/javascript/
+spec/support/marionette.component.js
