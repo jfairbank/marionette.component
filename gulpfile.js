@@ -28,9 +28,9 @@ gulp.task('wrap', function() {
   return gulp.src(srcFile)
     .pipe(wrap({
       namespace: 'Marionette.Component',
-      exports: 'Component',
+      exports: 'Marionette.Component',
       deps: [
-        { name: 'marionette', globalName: 'Marionette', paramName: 'Marionette' }
+        { name: 'backbone.marionette', globalName: 'Marionette', paramName: 'Marionette' }
       ]
     }))
     .pipe(gulp.dest(distPath));
@@ -89,7 +89,7 @@ gulp.task('buildTestLib', function() {
   return gulp.src(srcFile)
     .pipe(wrap({
       namespace: 'Marionette.Component',
-      exports: 'Component'
+      exports: 'Marionette.Component'
     }))
     .pipe(gulp.dest('spec/support'));
 });
