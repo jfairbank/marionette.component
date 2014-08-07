@@ -11,15 +11,30 @@ Marionette.Component = Marionette.Object.extend({
   constructor: function(options) {
     options = options || {};
 
-    this.region     = options.region;
     this.model      = options.model;
     this.collection = options.collection;
 
     Marionette.Object.prototype.constructor.apply(this, arguments);
   },
 
-  show: function() {
+  // Show this component inside a region
+  showIn: function(region) {
+    if (this._isShown) {
+      throw new Error('This component is already shown in a region.');
+    }
+
+    if (!region) {
+      throw new Error('Please supply a region to show inside.');
+    }
+
+    this.region = region;
+
+    this.triggerMethod('before:show');
+
     this._showView();
+    this._isShown = true;
+
+    this.triggerMethod('show');
   },
 
   // Destroy the component and view
@@ -39,13 +54,17 @@ Marionette.Component = Marionette.Object.extend({
     this._isDestroyed = true;
   },
 
+  // Show the view in the region
   _showView: function() {
     var view = this.view = this._getView();
 
-    this.listenTo(view, 'show', function() {
-      this.triggerMethod('show:view');
-    });
+    // Trigger show:view after the view is shown in the region
+    this.listenTo(view, 'show', _.partial(this.triggerMethod, 'show:view'));
 
+    // Trigger before:show before the region shows the view
+    this.triggerMethod('before:show:view');
+
+    // Show the view in the region
     this.region.show(view);
 
     // Destroy the component if the region is emptied because it destroys
@@ -53,6 +72,7 @@ Marionette.Component = Marionette.Object.extend({
     this.listenToOnce(this.region, 'empty', this.destroy);
   },
 
+  // Get an instance of the view to display
   _getView: function() {
     var ViewClass = this.viewClass;
 

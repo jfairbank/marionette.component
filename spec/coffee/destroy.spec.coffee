@@ -9,9 +9,9 @@ describe 'Marionette.Component', ->
       it 'empties the region', ->
         expect(@emptySpy)
           .to.have.been.called
-          .and.have.been.calledOn(@options.region)
+          .and.have.been.calledOn(@region)
 
-        expect(@options.region.hasView()).to.be.false
+        expect(@region.hasView()).to.be.false
 
       it 'removes the reference to the view', ->
         expect(@component.view).to.be.undefined
@@ -49,6 +49,7 @@ describe 'Marionette.Component', ->
 
     # MyRegion
     @MyRegion = Marionette.Region.extend(el: '#main')
+    @region   = new @MyRegion()
 
     # MyView
     @MyView = Marionette.ItemView.extend(template: _.template('foo bar'))
@@ -63,14 +64,13 @@ describe 'Marionette.Component', ->
     @options =
       model:      new Backbone.Model()
       collection: new Backbone.Collection()
-      region:     new @MyRegion()
 
     # Set up and call `destroy`
     @component = new @MyComponent(@options)
 
   describe 'when calling `destroy` on the component', ->
     beforeEach ->
-      @component.show()
+      @component.showIn(@region)
       @view = @component.view
       @component.destroy()
 
@@ -78,9 +78,9 @@ describe 'Marionette.Component', ->
 
   describe 'when emptying the region', ->
     beforeEach ->
-      @component.show()
+      @component.showIn(@region)
       @view = @component.view
-      @options.region.empty()
+      @region.empty()
 
     sharedTests()
 
