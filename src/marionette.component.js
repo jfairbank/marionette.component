@@ -1,11 +1,8 @@
 // Marionette.Component
 // --------------------
-// An object to represent an application component, typically 
-// something visual, encapsulated in to an object that can be 
-// instantiated and dispalyed on screen as needed.
-//
-// Marionette.Component can optionally have a `region`, `model`,
-// and/or `collection` passed to it through the constructor options.
+// A reusable component object that encapsulates a view and maintains
+// business logic on itself instead of the view. A `Marionette.Component`
+// can have an optional model and collection too.
 
 Marionette.Component = Marionette.Object.extend({
   constructor: function(options) {
@@ -95,6 +92,7 @@ Marionette.Component = Marionette.Object.extend({
     }
   },
 
+  // Destroy a view by emptying the region
   _destroyViewThroughRegion: function() {
     var region = this.region;
 
