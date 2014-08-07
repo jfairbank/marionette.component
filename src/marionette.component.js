@@ -58,6 +58,8 @@ Marionette.Component = Marionette.Object.extend({
   _showView: function() {
     var view = this.view = this._getView();
 
+    this._initializeViewEvents();
+
     // Trigger show:view after the view is shown in the region
     this.listenTo(view, 'show', _.partial(this.triggerMethod, 'show:view'));
 
@@ -84,6 +86,13 @@ Marionette.Component = Marionette.Object.extend({
       model: this.model,
       collection: this.collection
     });
+  },
+
+  // Set up events from the `viewEvents` hash
+  _initializeViewEvents: function() {
+    if (this.viewEvents) {
+      this.bindEntityEvents(this.view, this.viewEvents);
+    }
   },
 
   _destroyViewThroughRegion: function() {
