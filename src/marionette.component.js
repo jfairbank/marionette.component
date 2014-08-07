@@ -22,6 +22,23 @@ Marionette.Component = Marionette.Object.extend({
     this._showView();
   },
 
+  // Destroy the component and view
+  destroy: function() {
+    if (this._isDestroyed) {
+      return;
+    }
+
+    this.triggerMethod('before:destroy');
+
+    this._destroyViewThroughRegion();
+    this._removeReferences();
+
+    this.triggerMethod('destroy');
+    this.stopListening();
+
+    this._isDestroyed = true;
+  },
+
   _showView: function() {
     var view = this.view = this._getView();
 
@@ -30,6 +47,10 @@ Marionette.Component = Marionette.Object.extend({
     });
 
     this.region.show(view);
+
+    // Destroy the component if the region is emptied because it destroys
+    // the view
+    this.listenToOnce(this.region, 'empty', this.destroy);
   },
 
   _getView: function() {
@@ -43,5 +64,31 @@ Marionette.Component = Marionette.Object.extend({
       model: this.model,
       collection: this.collection
     });
+  },
+
+  _destroyViewThroughRegion: function() {
+    var region = this.region;
+
+    // Don't do anything if there isn't a region or view.
+    // We need to check the view or we could empty the region before we've
+    // shown the component view. This would destroy an existing view in the
+    // region.
+    if (!region || !this.view) {
+      return;
+    }
+
+    // Remove listeners on region, so we don't call `destroy` a second time
+    this.stopListening(region);
+
+    // Destroy the view by emptying the region
+    region.empty();
+  },
+
+  // Remove references to all attached objects
+  _removeReferences: function() {
+    delete this.model;
+    delete this.collection;
+    delete this.region;
+    delete this.view;
   }
 });
