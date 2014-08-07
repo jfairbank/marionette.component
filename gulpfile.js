@@ -30,6 +30,7 @@ gulp.task('wrap', function() {
       namespace: 'Marionette.Component',
       exports: 'Marionette.Component',
       deps: [
+        { name: 'underscore',          globalName: '_',          paramName: '_' },
         { name: 'backbone.marionette', globalName: 'Marionette', paramName: 'Marionette' }
       ]
     }))
