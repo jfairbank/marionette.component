@@ -2,10 +2,7 @@
   "name": "Marionette.Component",
   "version": "0.0.1",
   "description": "Create and manage reusable components in Marionette.js",
-  "main": "marionette.component.js",
-  "directories": {
-    "example": "examples"
-  },
+  "main": "dist/marionette.component.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -18,7 +15,8 @@
     "backbone",
     "marionette",
     "backbonejs",
-    "marionettejs"
+    "marionettejs",
+    "components"
   ],
   "author": {
     "name": "Jeremy Fairbank",
@@ -41,7 +39,6 @@
     "gulp-clean": "~0.3.1",
     "gulp-coffee": "~2.1.1",
     "jquery": "~2.1.1",
-    "coffee-script": "~1.7.1",
     "jsdom": "~0.11.1",
     "chai": "~1.9.1",
     "sinon": "~1.9.1",
