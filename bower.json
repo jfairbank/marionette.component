@@ -1,0 +1,29 @@
+{
+  "name": "marionette.component",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jfairbank/marionette.component",
+  "authors": [
+    "Jeremy Fairbank <elpapapollo@gmail.com>"
+  ],
+  "description": "Create and manage reusable components in Marionette.js",
+  "main": "dist/marionette.component.js",
+  "keywords": [
+    "backbone",
+    "marionette",
+    "backbonejs",
+    "marionettejs",
+    "components"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "spec"
+  ],
+  "dependencies": {
+    "backbone.marionette": "~2.1.0",
+    "underscore": "1.4.4 - 1.6.0"
+  }
+}
