@@ -1,5 +1,5 @@
 {
-  "name": "Marionette.Component",
+  "name": "marionette.component",
   "version": "0.0.1",
   "description": "Create and manage reusable components in Marionette.js",
   "main": "dist/marionette.component.js",
